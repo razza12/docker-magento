@@ -1,0 +1,2 @@
+#!/bin/bash
+bin/cli bash -c "cd vendor/snowdog/frontools && yarn --verbose && gulp setup"
