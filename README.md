@@ -9,8 +9,6 @@
   <a href="https://opensource.org/licenses/MIT" target="_blank"><img src="https://img.shields.io/badge/license-MIT-blue.svg" /></a>
 </div>
 
-## Table of contents
-
 - [Docker Hub](#docker-hub)
 - [Usage](#usage)
 - [Prerequisites](#prerequisites)
@@ -89,7 +87,7 @@ Same result as the one-liner above. Just replace `magento2.test` references with
 
 ```
 # Quick setup for a new instance of Magento 2:
-curl -s https://raw.githubusercontent.com/markoshust/docker-magento/master/lib/template|bash -s -- magento-2
+curl -s https://raw.githubusercontent.com/razza12/docker-magento/master/lib/template|bash -s -- magento-2
 
 # New projects can easily download by version:
 bin/download 2.3.0
@@ -135,6 +133,8 @@ open https://magento2.test
 - `bin/fixowns`: This will fix filesystem ownerships within the container.
 - `bin/fixperms`: This will fix filesystem permissions within the container.
 - `bin/grunt`: Run the grunt binary. Note that this runs the version from the node_modules directory for project version parity. Ex. `bin/grunt exec`
+- `bin/gulp` : Runs gulp in the tools directory
+- `bin/frontools` : Runs vendor/snowdog/frontools yarn && gulp setup
 - `bin/magento`: Run the Magento CLI. Ex: `bin/magento cache:flush`
 - `bin/node`: Run the node binary. Ex. `bin/node --version`
 - `bin/npm`: Run the npm binary. Ex. `bin/npm install`
