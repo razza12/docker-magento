@@ -5,7 +5,7 @@ version: "3"
 
 services:
   app:
-    image: markoshust/magento-nginx:1.13-7
+    image: bareblends/magento-nginx:1.13-7
     ports:
       - "80:8000"
       - "443:8443"
@@ -16,9 +16,17 @@ services:
       - ~/.composer:/var/www/.composer:delegated
       - appdata:/var/www/html
       - sockdata:/sock
+      - ./data/certbot/conf:/etc/letsencrypt
+      - ./data/certbot/www:/var/www/certbot
+
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - ./data/certbot/conf:/etc/letsencrypt
+      - ./data/certbot/www:/var/www/certbot
 
   phpfpm:
-    image: bareblends/php7.2-fpm:latest
+    image: bareblends/php7.2-fpm:0.1
     links:
       - db
     volumes: *appvolumes
