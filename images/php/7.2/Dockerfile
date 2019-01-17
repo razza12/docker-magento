@@ -51,11 +51,11 @@ RUN apt-get install -y gnupg \
 
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
   && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
-  && apt-get update && apt-get install yarn \
+  && apt-get update && apt-get install -y yarn \
   && npm install -g gulp-cli \
-  && mkdir /var/www/.config /var/www/.npm \
+  && mkdir /var/www/.config /var/www/.npm /var/www/.yarn \
   && touch /var/www/.yarnrc \
-  && chown app:app /var/www/.config /var/www/.npm  /var/www/.yarnrc \
+  && chown app:app /var/www/.config /var/www/.npm /var/www/.yarn /var/www/.yarnrc \
   && ln -s /var/www/html/node_modules/grunt/bin/grunt /usr/bin/grunt
 
 RUN printf '* *\t* * *\tapp\t%s/usr/local/bin/php /var/www/html/update/cron.php\n' >> /etc/crontab
