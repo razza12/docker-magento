@@ -47,9 +47,23 @@ RUN groupadd -g 1000 app \
 
 RUN apt-get install -y gnupg \
   && curl -sL https://deb.nodesource.com/setup_8.x | bash - \
-  && apt-get install -y nodejs \
-  && mkdir /var/www/.config /var/www/.npm \
-  && chown app:app /var/www/.config /var/www/.npm \
+  && apt-get install -y nodejs
+
+# ioncube loader
+RUN curl -fSL 'http://downloads3.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.tar.gz' -o ioncube.tar.gz \
+    && mkdir -p ioncube \
+    && tar -xf ioncube.tar.gz -C ioncube --strip-components=1 \
+    && rm ioncube.tar.gz \
+    && mv ioncube/ioncube_loader_lin_7.2.so /var/www/ioncube_loader_lin_7.2.so \
+    && rm -r ioncube
+
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
+  && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
+  && apt-get update && apt-get install -y yarn \
+  && npm install -g gulp-cli \
+  && mkdir /var/www/.config /var/www/.npm /var/www/.yarn \
+  && touch /var/www/.yarnrc \
+  && chown app:app /var/www/.config /var/www/.npm /var/www/.yarn /var/www/.yarnrc \
   && ln -s /var/www/html/node_modules/grunt/bin/grunt /usr/bin/grunt
 
 RUN printf '* *\t* * *\tapp\t%s/usr/local/bin/php /var/www/html/update/cron.php\n' >> /etc/crontab
