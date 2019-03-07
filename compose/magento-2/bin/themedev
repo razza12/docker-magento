@@ -1,1 +1,1 @@
-cd src/vendor/bareblends/theme-frontend-b2b && git init && git remote add origin git@github.com:razza12/theme-frontend-b2b.git && git add . && git pull origin master --allow-unrelated-histories
+cd src/vendor/bareblends/theme-frontend-b2b && git init && git remote add origin git@github.com:bareblends/theme-frontend-b2b.git && git add . && git pull origin master --allow-unrelated-histories
